@@ -1,1 +1,184 @@
-Include in this file the 7 steps for Iteration 2
+ITERATION 2
+Step 2 - Establish the Iteration Goal:
+The goal of this iteration is to address general architecture concerns of identifying structures to support
+primary functionality.
+UC-1: Always allows a student to ask academic inquiries, such as when their next exam is. The
+system will then understand the question using Natural Language Processing. It will further
+output the date and time from the school.
+UC-4: Lecturers shall be able to post announcements by text or voice to their students.
+UC-8: The maintainer shall be able to put out new AI models and API key configurations
+without downtime.
+Step 3 - Choose One or more Layers to refine
+The elements that we will refine in this iteration are modules located in the different layered
+defined by the reference architectures we used in the previous iteration. In order to support the
+functionality of the system, we require collaboration of components with these modules in these
+different layers.
+Step 4 - Choose one ore more design concepts that satisfy the selected drivers
+Design Decisions and Location Rationale
+Create Domain Model for our AIDAP Creating an initial domain model for the
+system is used to clearly define our use cases
+in our early architecture, We need the domain
+model to map UC-1, UC-4, and UC-
+specifically to ensure each functional
+requirement is contained in a building block.
+Introduce a Facade layer between Client and
+Server Modules
+Based on our current use cases, since UC-
+and UC-4 requie several different modules
+that are between different layers, a facade
+provides a joint entry point, hiding the
+internal complexity of the system. This would
+in turn reduce coupling in the system and
+ensures consistent communication paths.
+Utilize REST Communication through API
+Gateway
+REST allows us to use a simple, standardized
+communication though a single gateway,
+
+satisfying security drivers by centralizing
+authentication and request validation before
+business logic is executed.
+Identify Domain Objects that map to
+functional requirements
+To ensure each primary use case is supported,
+UC-1, UC-4 and UC-8 must be clearly
+defined early in the architecture. Each distict
+functional element should be encapsulated in
+a Domain Object, ensuring structure for the
+modules refined in the iteration.
+Step 5 - Instantiate Architectural Elements, Allocate responsibilities, define interfaces
+Design Decision Rationale
+Create Domain model for AIDAP The domain model clarifies system entities
+and supports early mapping of UC-1, UC-
+and UC-8, ensuring every functional
+requirement is represented by a corresponding
+building block
+Introduce a Facade Layer between Client
+and Server Modules
+UC-1 and UC-4 rely on multiple modules
+across layers. A facade provides a unified
+entry point, hides internal complexity, reduces
+coupling, and ensures consistent
+communication paths.
+Utilize REST Communication Through an
+API Gateway
+Ret offers simple, standardized
+communication. The API Gateway centralizes
+authentication, request validation, and
+routing, improving security and consistency
+before business logic is executed.
+Identify Domain Objects That Map to
+Functional Requirements
+Ensures proper support for UC-1, UC-4 and
+UC-8 by encapsulating each functional
+element into domain objects that form the
+basis of responsibilities and service
+boundaries.
+Step 6 - Sketch views and record design decisions
+
+Element Responsibility
+Chat UI Displays the conversational interface, sends both staff
+and student questions to the backend, and displays
+the answers (UC-1)
+Dashboard UI Displays personalized dashboard that includes
+deadlines, academic information, and events
+pertinent to the user that is logged in (UC-3)
+Client Controller Screen flow is managed between both the chat and
+the dashboard, and forwarding of user actions from
+the UI to the API Gateway
+Auth Handler Start single sign on login, tracks user that is logged
+in, and connects identity information to client
+requests (UC-6)
+Local Cache Stores recent data temporarily on the client side to
+help improve performance, as well as help with
+limited connectivity
+Logging Records events and requests throughout the system
+that is important to allow behaviour to be analyzed
+and reviewed later (UC-7)
+Security Security checks that include academic data protection
+and access control.
+Error Handling Finds out and handles failures in a way that returns
+error information to either user or maintainer.
+API Gateway Serves as the main gateway for client requests,
+performing initial checks and directing each requests
+to the correct backend service
+External Integration Service Handles connections to the institutional platforms
+like the LMS, registration system, calendar, and
+emails ensuring that AIDAP’s internal data remains
+synchronized with the systems
+Query Processor Understands User questions, works with AI
+components and data sources, and returns reponses
+for academic or scheduling inquiries
+Dashboard Manager Gathers and aggregates the information required for a
+user's dashboard, including upcoming tasks,
+assignments and events.
+
+Announcement Manager Enables instructors and administrators to create and
+manage course or campus announcements that
+students can view and receive notifications for
+User Data Store Maintains user profiles, roles and preferences that are
+required for authentication and personalized
+behaviour
+Conversation Store Stores a history of interactions between the user and
+the assistant so the system can offer context-aware
+and personalized responses while still following
+privacy rules
+Analytics Store Saves combined usage and performance data that is
+used for system monitoring and generating reports.
+Step 7 - Perform Analysis of Current Design and review Iteration Goal and Achievement of
+Design Purpose
+The design choices made in iteration 2 includes:
+● Developing a Domain Model for AIDAP.
+● Adding a Facade Layer between theclient and server components.
+● Using REST-based communication via the API Gateway.
+● Identifying th Domain objects that correspond to the selected functional
+requirements.
+Driver Status How it is addressed
+UC-1, UC-8, and
+UC4 need to be
+represented in the
+domain model
+Partial address The domain model introduction, as well as explicit
+domain objects makes sure query handling, AI model
+updates, and course announcements all have dedicated
+concepts in the architecture. Though for the exact list of
+domain objects, their respective relationships, and their
+respective attribute
+QA-5 - Modifiability
+(ease of update)
+Partial address The placement of a facade between the client and server
+helps reduce coupling which makes it easier to modify
+internal logic with no dependency. Future iterations
+need to refine the way domain objects are grouped into
+modules and how API versioning will be handled to
+satisfy this QA.
+QA-4 - Security Partial address REST used through API Gateway where facade pattern
+
+Iteration 2 focused on refining the domain model and establishing a clear facade boundary so that the key
+use cases are better supported and the system can grow safely.
+● The Domain Model and Domain objects now give a clearer structure for handling queries and
+AI-related functionality.
+● The combination of Facade/API Gateway and REST communication offers a unified access point
+for these operations and starts to tackle concerns around security and modifiability.
+Overall, many of the drivers are partially met.
+centralizes the request validation and authentication
+before the business logic execution.
+CON-1 - University
+privacy rules for
+academic data is
+followed
+Partial address Domain model identifies academic entities which is a
+prerequisite for defining sensitive data. Having these
+well devinfes domain objects and a facade givea a single
+consistent point from data to external system Translation
+in the AIDAP’s internal models.
+CRN-1/ CRN-3 -
+Consistency of
+integration and the
+secure handling of
+academic
+information
+Partial address Having well-defined domain objects and a facade gives
+a single, consistent point where data from external
+systems is translated into AIDAP’s internal model and
+checked before use.Include in this file the 7 steps for Iteration 2
